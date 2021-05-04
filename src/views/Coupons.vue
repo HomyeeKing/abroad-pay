@@ -2,7 +2,7 @@
 import axios from '@/axios'
 import CouponCard from '@/components/CouponCard.vue'
 import StickLine from '@/components/StickLine.vue'
-const { coupons } = await axios.get<any, {coupons: any}>('/api/coupons')
+const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coupons: any; merchantCoupons: any}}>('/api/coupons')
 
 </script>
 
@@ -33,6 +33,25 @@ const { coupons } = await axios.get<any, {coupons: any}>('/api/coupons')
     </div>
     <div class="part-2">
       <StickLine main="商户优惠券" secondary="'请向收银员出示使用优惠券'" />
+      <div class="container d-flex flex-wrap">
+        <coupon-card
+          v-for="item of merchantCoupons"
+          :key="item"
+          :name="item.name"
+          :type="item.type"
+          :left-part="{icon:item.icon,threshold:item.threshold,icontip:item.icontip,discount:item.discount}"
+        >
+          <template v-if="!item.note" #note>
+            <span style="margin-right: 5px;">{{ `${item.HKD}港币=${item.RMB}人民币` }}</span>
+            <small class="text-gray">
+              市场参考价
+            </small>
+            <small class="text-gray text-deleted">
+              {{ item.RMBE }}人民币
+            </small>
+          </template>
+        </coupon-card>
+      </div>
     </div>
   </div>
 </template>

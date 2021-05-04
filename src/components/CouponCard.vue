@@ -1,7 +1,12 @@
 <script lang='ts' setup>
 import { defineProps } from 'vue'
 import type { PropType } from 'vue'
-
+interface LeftPart{
+  icon: string
+  threshold: number
+  icontip: string
+  discount: number
+}
 defineProps({
   type: {
     type: [Number, String],
@@ -12,7 +17,7 @@ defineProps({
   note: String,
   remain: Number,
   leftPart: {
-    type: Object as PropType<Partial<{icon: string;threshold: number;icontip: string}>>,
+    type: Object as PropType<Partial<LeftPart>>,
   },
 })
 const cardBgColor: Record<any, Record<string, string>> = {
@@ -21,35 +26,63 @@ const cardBgColor: Record<any, Record<string, string>> = {
   3: { background: '#FFF2EA' },
 }
 
+const typeMap = {
+  working: 1, // 生效中
+  got: 2,
+  gotNormal: 3,
+  merchant: 4,
+}
 </script>
 
 <template>
-  <div class="coupon">
+  <div class="coupon" :class="{'coupon-merchant':type === typeMap.merchant}">
     <section class="card d-flex align-center" :style="cardBgColor[type]">
-      <img v-if="leftPart?.icon" :src="leftPart.icon" width="68" height="61">
-      <template v-else>
-        <section class="left-container" :class="[type === 3 ? 'text-darkred' :'text-white']">
-          <div :class="['threshold',`threshold-${type}`]">
-            {{ leftPart?.threshold }}
-          </div>
-          <b>元</b>
-          <p style="font-size:12px; color:#000;" :style="{'opacity':type === 3? .6: .9}">
-            {{ leftPart?.icontip }}
-          </p>
-        </section>
+      <!-- 商户券 -->
+      <template v-if="type === typeMap.merchant">
+        <div class="d-flex flex-column text-center">
+          <b>{{ name }}</b>
+          <!-- judge discount or hkd, let's simple here -->
+          <h1 class="text-darkred mt-1">
+            {{ leftPart?.discount }} <small class="text-small">折</small>
+          </h1>
+          <small class="text-darkred">{{ leftPart?.icontip }}</small>
+        </div>
       </template>
-      <slot name="left"></slot>
-      <div class="right" :class="[type===3?'text-black':'text-white']">
-        <b>{{ name }}</b>
-        <p class="tip">
-          {{ tip }}
-        </p>
-      </div>
+
+      <template v-else>
+        <img v-if="leftPart?.icon" :src="leftPart.icon" width="68" height="61">
+        <template v-else>
+          <section class="left-container" :class="[type === typeMap.gotNormal ? 'text-darkred' :'text-white']">
+            <div :class="['threshold',`threshold-${type}`]">
+              {{ leftPart?.threshold }}
+            </div>
+            <b>元</b>
+            <p style="font-size:12px; color:#000;" :style="{'opacity':type === typeMap.gotNormal? .6: .9}">
+              {{ leftPart?.icontip }}
+            </p>
+          </section>
+        </template>
+        <slot name="left"></slot>
+        <div class="right" :class="[type===typeMap.gotNormal?'text-black':'text-white']">
+          <b>{{ name }}</b>
+          <p class="tip">
+            {{ tip }}
+          </p>
+        </div>
+      </template>
     </section>
-    <section class="note d-flex align-center">
-      <span v-if="remain" class="unlock">{{ `${remain}张待解锁` }}</span>
-      <small v-if="note" class="text-gray">{{ note }}</small>
-      <slot name="note"></slot>
+    <section class="note d-flex align-center justify-center">
+      <!-- 优先判断是否是 商户优惠券 -->
+      <template v-if="type === typeMap.merchant">
+        <van-button color="#F15451">
+          使用优惠
+        </van-button>
+      </template>
+      <template v-else>
+        <span v-if="remain" class="unlock">{{ `${remain}张待解锁` }}</span>
+        <small v-if="note" class="text-gray">{{ note }}</small>
+        <slot name="note"></slot>
+      </template>
     </section>
   </div>
 </template>
@@ -61,6 +94,9 @@ const cardBgColor: Record<any, Record<string, string>> = {
     box-shadow: 0 3px 11px 0 rgba(179,179,179,0.50);
     margin 30px auto
     overflow hidden
+    &-merchant
+        width:170px;
+        height:215px;
 
 .card
     height 115px
