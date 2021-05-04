@@ -17,7 +17,6 @@ import Coupons from './Coupons.vue'
   </nav>
   <Suspense>
     <Coupons />
-
     <template #fallback>
       <van-loading vertical>
         加载中...

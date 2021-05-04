@@ -2,6 +2,8 @@
 import axios from '@/axios'
 import CouponCard from '@/components/CouponCard.vue'
 import StickLine from '@/components/StickLine.vue'
+import More from '@/components/More.vue'
+
 const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coupons: any; merchantCoupons: any}}>('/api/coupons')
 
 </script>
@@ -53,6 +55,7 @@ const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coup
         </coupon-card>
       </div>
     </div>
+    <More />
   </div>
 </template>
 <style lang="stylus" scoped>
