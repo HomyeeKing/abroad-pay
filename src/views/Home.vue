@@ -1,11 +1,12 @@
 <script lang='ts' setup>
+import logo from '@/assets/logo.png'
 import Coupons from './Coupons.vue'
 </script>
 
 <template>
   <nav class="nav">
     <section class="section">
-      <img src="../assets/logo.png" alt="" class="avatar">
+      <img :src="logo" class="avatar">
       <div class="d-inline-block">
         <p class="name-zh">
           屈臣氏
@@ -14,7 +15,15 @@ import Coupons from './Coupons.vue'
       </div>
     </section>
   </nav>
-  <Coupons />
+  <Suspense>
+    <Coupons />
+
+    <template #fallback>
+      <van-loading vertical>
+        加载中...
+      </van-loading>
+    </template>
+  </Suspense>
 </template>
 
 <style lang="stylus" scoped>

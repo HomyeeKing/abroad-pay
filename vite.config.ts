@@ -1,7 +1,9 @@
 import path from 'path'
 import { defineConfig, PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import styleImport from 'vite-plugin-style-import'
+import ViteComponents, {
+  VantResolver,
+} from 'vite-plugin-components'
 
 const resolve = (name: string) => path.resolve(__dirname, name)
 
@@ -48,19 +50,9 @@ function mocker(): PluginOption {
 export default defineConfig({
   plugins: [
     vue(),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'element-plus',
-          esModule: true,
-          ensureStyleFile: true,
-          resolveStyle: (name) => {
-            return `element-plus/lib/theme-chalk/${name}.css`
-          },
-          resolveComponent: (name) => {
-            return `element-plus/lib/${name}`
-          },
-        },
+    ViteComponents({
+      customComponentResolvers: [
+        VantResolver(),
       ],
     }),
     mocker(),

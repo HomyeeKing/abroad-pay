@@ -4,7 +4,7 @@
 
 html, body {
   height: 100%;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 .header,
 .footer {
@@ -43,7 +43,22 @@ html, body {
 
     &.justify-center
         justify-content: center
+    &.align-center  
+        align-items: center
 
 .d-inline-block
     display: inline-block
 
+.text
+    &-white
+        color white
+    &-black
+        color black
+    &-darkred
+        color #F15451 
+    &-gray
+        color #000
+        opacity .3
+        font-family: PingFangSC-Light;
+    &-deleted
+        text-decoration line-through
