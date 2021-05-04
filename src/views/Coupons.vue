@@ -10,7 +10,7 @@ const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coup
 
 <template>
   <div class="panel">
-    <div class="part-1">
+    <div>
       <StickLine main="微信支付优惠券" secondary="'微信支付自动抵扣'" />
       <coupon-card
         v-for="item of coupons"
@@ -33,7 +33,7 @@ const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coup
         </template>
       </coupon-card>
     </div>
-    <div class="part-2">
+    <div>
       <StickLine main="商户优惠券" secondary="'请向收银员出示使用优惠券'" />
       <div class="container d-flex flex-wrap">
         <coupon-card

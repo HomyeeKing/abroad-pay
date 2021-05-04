@@ -17,7 +17,6 @@ html, body {
 
 .header {
   top: 0;
-  background-color rgb(226,70,45)
   color #fff
   font-family: PingFangSC-Medium;
   font-size: 24px;    
@@ -30,9 +29,6 @@ html, body {
 
 
 .main {
-  height: 100%;
-  padding: 44px 0;
-  box-sizing: border-box;
   background-color rgb(226,70,45)
 }
 
@@ -51,6 +47,10 @@ html, body {
         flex-wrap: wrap 
     &.justify-space-between
         justify-content: space-between
+    &.justify-space-around
+        justify-content: space-around
+    &.flex-1
+        flex:1
 
 .d-inline-block
     display: inline-block

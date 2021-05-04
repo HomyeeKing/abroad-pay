@@ -89,7 +89,7 @@ const typeMap = {
 
 <style lang="stylus" scoped>
 .coupon
-    width 347.5px
+    width 337px
     height 171px
     box-shadow: 0 3px 11px 0 rgba(179,179,179,0.50);
     margin 30px auto

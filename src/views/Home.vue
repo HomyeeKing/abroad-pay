@@ -1,6 +1,8 @@
 <script lang='ts' setup>
 import logo from '@/assets/logo.png'
+import { inject } from '@vue/runtime-core'
 import Coupons from './Coupons.vue'
+const isBottom = inject('isBottom')
 </script>
 
 <template>
@@ -23,11 +25,13 @@ import Coupons from './Coupons.vue'
       </van-loading>
     </template>
   </Suspense>
+  <div v-if="isBottom" class="text-gray text-center foo-content mt-1">
+    活动规则 | 联系客服
+  </div>
 </template>
 
 <style lang="stylus" scoped>
 .nav
-    height 100px
 
     .name-zh
        font-family: PingFangSC-Medium;
@@ -49,5 +53,6 @@ import Coupons from './Coupons.vue'
     background: #15918C;
     border: 3px solid #FFB8B7;
     margin-right 2.5%
+    border-radius 50%
 
 </style>

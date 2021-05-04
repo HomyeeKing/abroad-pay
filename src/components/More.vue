@@ -5,13 +5,14 @@
 <template>
   <div class="container d-flex align-center justify-space-between">
     <h3>🎪   更多商家优惠</h3>
-    <span>&#xbb;</span>
+    <van-icon name="arrow" />
   </div>
 </template>
 
 <style scoped lang="stylus">
 .container
-    width 337px
+    left 0
+    right 0
     height 70px
     box-sizing border-box
     padding 20px
