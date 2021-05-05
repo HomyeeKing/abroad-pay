@@ -19,11 +19,13 @@ defineProps({
   leftPart: {
     type: Object as PropType<Partial<LeftPart>>,
   },
+  cardStyle: Object,
 })
 const cardBgColor: Record<any, Record<string, string>> = {
   1: { 'background-image': 'linear-gradient(200deg, #FFA000 0%, #FF8F00 100%)' },
   2: { background: '#00C250' },
   3: { background: '#FFF2EA' },
+  4: { background: '#FFF2EA' },
 }
 
 const typeMap = {
@@ -36,17 +38,19 @@ const typeMap = {
 
 <template>
   <div class="coupon" :class="{'coupon-merchant':type === typeMap.merchant}">
-    <section class="card d-flex align-center" :style="cardBgColor[type]">
+    <section
+      class="card d-flex justify-center align-center"
+      :style="{...cardBgColor[type],...cardStyle}"
+      :class="{'flex-column':type === typeMap.merchant}"
+    >
       <!-- 商户券 -->
       <template v-if="type === typeMap.merchant">
-        <div class="d-flex flex-column text-center">
-          <b>{{ name }}</b>
-          <!-- judge discount or hkd, let's simple here -->
-          <h1 class="text-darkred mt-1">
-            {{ leftPart?.discount }} <small class="text-small">折</small>
-          </h1>
-          <small class="text-darkred">{{ leftPart?.icontip }}</small>
-        </div>
+        <b>{{ name }}</b>
+        <!-- judge discount or hkd, let's simple here -->
+        <h1 class="text-darkred mt-1">
+          {{ leftPart?.discount }} <small class="text-small">折</small>
+        </h1>
+        <small class="text-darkred">{{ leftPart?.icontip }}</small>
       </template>
 
       <template v-else>
@@ -100,11 +104,10 @@ const typeMap = {
 
 .card
     height 115px
-    padding 40px
     box-sizing border-box
 
     .right
-        margin 20px
+        margin-left 20px
         .tip
             opacity: 0.9;
             margin-top 10px
@@ -118,6 +121,7 @@ $radius = 20px
     box-sizing: border-box;
     border-top 1px dashed #000
     white-space nowrap
+    background-color #fff
 
     &:before,&:after
         content:''
