@@ -1,7 +1,7 @@
 <script lang='ts' setup>
 import logo from '@/assets/logo.png'
+import Overlay from '@/components/Overlay.vue'
 import Coupons from './Coupons.vue'
-
 </script>
 
 <template>
@@ -17,7 +17,10 @@ import Coupons from './Coupons.vue'
     </section>
   </nav>
   <Suspense>
-    <Coupons />
+    <div>
+      <Overlay />
+      <Coupons />
+    </div>
     <template #fallback>
       <van-loading vertical>
         加载中...
