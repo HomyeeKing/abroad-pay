@@ -1,8 +1,7 @@
 <script lang='ts' setup>
 import logo from '@/assets/logo.png'
-import { inject } from '@vue/runtime-core'
 import Coupons from './Coupons.vue'
-const isBottom = inject('isBottom')
+
 </script>
 
 <template>
@@ -25,9 +24,6 @@ const isBottom = inject('isBottom')
       </van-loading>
     </template>
   </Suspense>
-  <div v-if="isBottom" class="text-gray text-center foo-content mt-1">
-    活动规则 | 联系客服
-  </div>
 </template>
 
 <style lang="stylus" scoped>

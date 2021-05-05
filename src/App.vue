@@ -5,10 +5,6 @@
     <Home />
   </main>
   <footer class="footer">
-    <!-- <div v-if="isBottom" class="text-gray text-center foo-content mt-1">
-      活动规则 | 联系客服
-    </div> -->
-
     <Pay v-if="!isBottom" />
   </footer>
 </template>
@@ -18,13 +14,10 @@ import Home from '@/views/Home.vue'
 import Pay from '@/components/Pay.vue'
 import { ref } from '@vue/reactivity'
 import throttle from 'lodash.throttle'
-import { provide } from '@vue/runtime-core'
-
 const html = document.documentElement
 const isBottom = ref(false)
 const calcScroll = () => {
-  isBottom.value = html.scrollHeight - html.scrollTop <= html.clientHeight
-  provide('isBottom', isBottom.value)
+  isBottom.value = html.scrollHeight - html.scrollTop <= html.clientHeight + 100
 }
 
 document.addEventListener('scroll', throttle(calcScroll))

@@ -56,6 +56,9 @@ const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coup
       </div>
     </div>
     <More />
+    <div class="placeholder text-center  mt-1">
+      活动规则 | 联系客服
+    </div>
   </div>
 </template>
 <style lang="stylus" scoped>
@@ -64,6 +67,9 @@ const { data: { coupons, merchantCoupons } } = await axios.get<any, {data: {coup
     border-top-right-radius  25px
     border-top-left-radius 25px
     padding 20px 10px
-    overflow auto
 
+.placeholder
+    height 80px
+    line-height @height
+    opacity .6
 </style>
