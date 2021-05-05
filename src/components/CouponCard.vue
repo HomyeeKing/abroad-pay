@@ -1,11 +1,17 @@
 <script lang='ts' setup>
 import { defineProps } from 'vue'
 import type { PropType } from 'vue'
+import SvgClip from './SvgClip.vue'
 interface LeftPart{
   icon: string
   threshold: number
   icontip: string
   discount: number
+}
+interface CardStyle{
+  width: number
+  height: number
+  background: string
 }
 defineProps({
   type: {
@@ -19,7 +25,9 @@ defineProps({
   leftPart: {
     type: Object as PropType<Partial<LeftPart>>,
   },
-  cardStyle: Object,
+  cardStyle: {
+    type: Object as PropType<Partial<CardStyle>>,
+  },
 })
 const cardBgColor: Record<any, Record<string, string>> = {
   1: { 'background-image': 'linear-gradient(200deg, #FFA000 0%, #FF8F00 100%)' },
@@ -34,13 +42,14 @@ const typeMap = {
   gotNormal: 3,
   merchant: 4,
 }
+
 </script>
 
 <template>
   <div class="coupon" :class="{'coupon-merchant':type === typeMap.merchant}">
     <section
       class="card d-flex justify-center align-center"
-      :style="{...cardBgColor[type],...cardStyle}"
+      :style="cardBgColor[type]"
       :class="{'flex-column':type === typeMap.merchant}"
     >
       <!-- 商户券 -->
@@ -75,6 +84,9 @@ const typeMap = {
         </div>
       </template>
     </section>
+    <!-- make concave circle , maybe it's better using svg to do this , late to refact now :/ -->
+    <!-- <p class="placeholder placeholder-1" :style="{background:cardStyle.background}|| cardBgColor[type]"></p>
+    <p class="placeholder placeholder-2"></p> -->
     <section class="note d-flex align-center justify-center">
       <!-- 优先判断是否是 商户优惠券 -->
       <template v-if="type === typeMap.merchant">
@@ -92,9 +104,11 @@ const typeMap = {
 </template>
 
 <style lang="stylus" scoped>
+$radius = 20px
+
 .coupon
-    width 337px
-    height 171px
+    width: 337px
+    height: 171px
     box-shadow: 0 3px 11px 0 rgba(179,179,179,0.50);
     margin 30px auto
     overflow hidden
@@ -112,7 +126,6 @@ const typeMap = {
             opacity: 0.9;
             margin-top 10px
 
-$radius = 20px
 .note
     position relative
     box-shadow: 0 1px 4px 0 rgba(183,183,183,0.50);
@@ -127,9 +140,9 @@ $radius = 20px
         content:''
         position absolute
         width $radius
-        height $radius
-        border-radius 50%
+        height @width
         background-color #fff
+        border-radius 50%
         top 0
 
     &:before
