@@ -2887,6 +2887,11 @@ vite-plugin-components@^0.8.4:
     fast-glob "^3.2.5"
     minimatch "^3.0.4"
 
+vite-plugin-imock@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.npmjs.org/vite-plugin-imock/-/vite-plugin-imock-0.0.3.tgz#9dbdc737754546863e40a804b213259aa6cb72c6"
+  integrity sha512-5gjT88g09sZ5lFY8/4HbqQZ5cCD4CsDOPR9dOpVX679GRGbW2prECjpcXm4ghfbrZSsldqSqvcC8lHeuUWGWog==
+
 vite@^2.2.3:
   version "2.2.4"
   resolved "https://registry.npmjs.org/vite/-/vite-2.2.4.tgz#8f9cc85aacab04c850085894b086c8717f12ed16"
